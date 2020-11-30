@@ -1,6 +1,7 @@
 
 package webdriver;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +12,6 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 
 public class Webelement {
 	WebDriver driver;
@@ -32,7 +32,6 @@ public class Webelement {
 	By matKhau = By.id("password");
 	By confirmMk = By.id("rePassword");
 	By chinhSach = By.id("chinhSach");
-
 
 	@BeforeClass
 	public void beforeClass() {
@@ -64,11 +63,9 @@ public class Webelement {
 		if (ngaySinh.isEnabled()) {
 			ngaySinh.sendKeys("26/03/1991");
 		}	
-
-		if (ten.isEnabled()) {
 			select = new Select(driver.findElement(By.id("gioiTinh")));
 			select.selectByVisibleText("Nữ");	
-		}
+		
 		WebElement sdt = driver.findElement(By.id("soDienThoai"));
 		if (sdt.isEnabled()) {
 			sdt.sendKeys("0377839862");
@@ -80,12 +77,27 @@ public class Webelement {
 		
 		select = new Select(driver.findElement(By.id("thuongtru_tinhthanh")));
 		select.selectByVisibleText("thành phố Hà Nội");
+		System.out.println("So tinh thanh =" + select.getOptions().size());
+		List<WebElement> TinhValue = select.getOptions();
+		for (int i = 0; i < TinhValue.size(); i++) {
+			System.out.println("Tinh =" + TinhValue.get(i).getText());
+		}
 		Assert.assertEquals(select.getFirstSelectedOption().getText(),"thành phố Hà Nội");
 		select = new Select(driver.findElement(By.id("thuongtru_quanhuyen")));
 		select.selectByVisibleText("Quận Bắc Từ Liêm");
+		System.out.println("So huyen =" + select.getOptions().size());
+		List<WebElement> Huyen = select.getOptions();
+		for (int i = 0; i < Huyen.size(); i++) {
+			System.out.println("Huyen =" + Huyen.get(i).getText());
+		}
 		Assert.assertEquals(select.getFirstSelectedOption().getText(),"Quận Bắc Từ Liêm");
 		select = new Select(driver.findElement(By.id("thuongtru_phuongxa")));
 		select.selectByVisibleText("Phường Mễ Trì");
+		System.out.println("So xa =" + select.getOptions().size());
+		List<WebElement> Xa = select.getOptions();
+		for (int a = 0; a < Xa.size(); a++) {
+			System.out.println("Xa =" + Xa.get(a).getText());
+		}
 		Assert.assertEquals(select.getFirstSelectedOption().getText(),"Phường Mễ Trì");
 		driver.findElement(By.id("email")).sendKeys("Uttester.tb@gmail.com");
 		driver.findElement(By.id("password")).sendKeys("260391Ut");
