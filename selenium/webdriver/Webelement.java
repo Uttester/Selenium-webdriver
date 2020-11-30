@@ -80,10 +80,13 @@ public class Webelement {
 		
 		select = new Select(driver.findElement(By.id("thuongtru_tinhthanh")));
 		select.selectByVisibleText("thành phố Hà Nội");
+		Assert.assertEquals(select.getFirstSelectedOption().getText(),"thành phố Hà Nội");
 		select = new Select(driver.findElement(By.id("thuongtru_quanhuyen")));
 		select.selectByVisibleText("Quận Bắc Từ Liêm");
+		Assert.assertEquals(select.getFirstSelectedOption().getText(),"Quận Bắc Từ Liêm");
 		select = new Select(driver.findElement(By.id("thuongtru_phuongxa")));
 		select.selectByVisibleText("Phường Mễ Trì");
+		Assert.assertEquals(select.getFirstSelectedOption().getText(),"Phường Mễ Trì");
 		driver.findElement(By.id("email")).sendKeys("Uttester.tb@gmail.com");
 		driver.findElement(By.id("password")).sendKeys("260391Ut");
 		driver.findElement(By.id("rePassword")).sendKeys("260391Ut");
