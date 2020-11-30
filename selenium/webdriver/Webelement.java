@@ -1,41 +1,38 @@
 
-/* 
- * 
- *  
- *  
- *  
- *  
- *  
- *  
- *  
- *  
- *  */
-
-
-
-
-
 package webdriver;
 
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+
 public class Webelement {
 	WebDriver driver;
-	WebElement element;
-	By emailDangNhap = By.id("mail");
-	By Age = By.id("under_18");
-	By Education = By.id("edu");
-	By job = By.id("job1");
-	By development = By.id("development");
-	By slider = By.id("slider-2");
+	Webelement element;
+	Select select;
+	By ho = By.id("ho");
+	By dem = By.id("dem");
+	By ten = By.id("ten");
+	By cmt = By.id("soCmnd");
+	By ngaySinh = By.id("ngaySinh");
+	By gioiTinh = By.id("gioiTinh");
+	By sdt = By.id("soDienThoai");
+	By diachiThuongTru = By.id("motaThuongTru");
+	By tinh = By.id("thuongtru_tinhthanh");
+	By quan = By.id("thuongtru_quanhuyen");
+	By xa = By.id("thuongtru_phuongxa");
+	By email = By.id("email");
+	By matKhau = By.id("password");
+	By confirmMk = By.id("rePassword");
+	By chinhSach = By.id("chinhSach");
+
 
 	@BeforeClass
 	public void beforeClass() {
@@ -46,44 +43,59 @@ public class Webelement {
 
 	@Test
 	public void TC_09_CheckEnable() {
-		driver.get("https://automationfc.github.io/basic-form/index.html");
-		WebElement mailDnhap = driver.findElement(By.id("mail"));
-		if (mailDnhap.isEnabled()) {
-			mailDnhap.sendKeys("Nguyenut@gmail.com");
-			System.out.println(emailDangNhap);
+		driver.get("https://egov.danang.gov.vn/reg");
+		WebElement ho = driver.findElement(By.id("ho"));
+		if (ho.isEnabled()) {
+			ho.sendKeys("Nguyen");
 		}
-		WebElement Age = driver.findElement(By.id("under_18"));
-		if (Age.isEnabled()) {
-			Age.click();
-			System.out.println(Age);
+		WebElement dem = driver.findElement(By.id("dem"));
+		if (dem.isEnabled()) {
+			dem.sendKeys("Thi");
 		}
-		WebElement Education = driver.findElement(By.id("edu"));
-		if (Education.isEnabled()) {
-			Education.sendKeys("Tốt nghiệp đại học");
-			System.out.println(Education);
+		WebElement ten = driver.findElement(By.id("ten"));
+		if (ten.isEnabled()) {
+			ten.sendKeys("Ut");
 		}
+		WebElement cmt = driver.findElement(By.id("soCmnd"));
+		if (cmt.isEnabled()) {
+			cmt.sendKeys("151850678");
+		}
+		WebElement ngaySinh = driver.findElement(By.id("ngaySinh"));
+		if (ngaySinh.isEnabled()) {
+			ngaySinh.sendKeys("26/03/1991");
+		}	
 
-		if (Age.isSelected()) {
-			System.out.println("Age:" + Age);
+		if (ten.isEnabled()) {
+			select = new Select(driver.findElement(By.id("gioiTinh")));
+			select.selectByVisibleText("Nữ");	
 		}
-		if (driver.findElement(development).isDisplayed()) {
-			driver.findElement(development).click();
-			System.out.println("Check display: " + driver.findElement(development).isDisplayed());
-			System.out.println("Check Select 1: " + driver.findElement(development).isSelected());
+		WebElement sdt = driver.findElement(By.id("soDienThoai"));
+		if (sdt.isEnabled()) {
+			sdt.sendKeys("0377839862");
 		}
-		if (driver.findElement(development).isSelected()) {
-			driver.findElement(development).click();
-			System.out.println("Check Select 2: " + driver.findElement(development).isSelected());
+		WebElement diachiThuongTru = driver.findElement(By.id("motaThuongTru"));
+		if (diachiThuongTru.isEnabled()) {
+			diachiThuongTru.sendKeys("81 Mễ Trì Thượng");
 		}
-
-	}
-
-	public void TC_09_CheckDisable() {
-		Assert.assertTrue(driver.findElement(By.xpath("//form[@name='frmLogin']")).isDisplayed());
-	}
-
-	public void TC_09_ClickRadio() {
-		Assert.assertTrue(driver.findElement(By.xpath("//form[@name='frmLogin']")).isDisplayed());
+		
+		select = new Select(driver.findElement(By.id("thuongtru_tinhthanh")));
+		select.selectByVisibleText("thành phố Hà Nội");
+		select = new Select(driver.findElement(By.id("thuongtru_quanhuyen")));
+		select.selectByVisibleText("Quận Bắc Từ Liêm");
+		select = new Select(driver.findElement(By.id("thuongtru_phuongxa")));
+		select.selectByVisibleText("Phường Mễ Trì");
+		driver.findElement(By.id("email")).sendKeys("Uttester.tb@gmail.com");
+		driver.findElement(By.id("password")).sendKeys("260391Ut");
+		driver.findElement(By.id("rePassword")).sendKeys("260391Ut");
+		
+		if (driver.findElement(chinhSach).isDisplayed()) {
+			driver.findElement(chinhSach).click();
+			System.out.println("Check display: " + driver.findElement(chinhSach).isDisplayed());
+			System.out.println("Chon dong y chinh sach: " + driver.findElement(chinhSach).isSelected());
+		}
+		driver.findElement(By.id("button2")).click();
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='portlet-msg-error']")).isDisplayed());
+		System.out.println("Đăng ký không thành công");
 	}
 
 	@AfterClass
